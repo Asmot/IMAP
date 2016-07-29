@@ -1,6 +1,5 @@
 package com.common.maps;
 
-
 import com.common.maps.model.IMarker;
 import com.common.maps.model.LatLngWrapper;
 import com.common.maps.model.MarkerOptionWrapper;
