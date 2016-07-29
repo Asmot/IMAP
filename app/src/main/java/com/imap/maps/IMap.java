@@ -1,5 +1,7 @@
 package com.imap.maps;
 
+import com.imap.maps.model.IMarker;
+import com.imap.maps.model.IMarkerOptions;
 import com.imap.maps.model.LatLngWrapper;
 
 /**
@@ -59,6 +61,15 @@ public interface IMap {
     }
 
     public void setOnMapClickListener(final OnMapClickListenerWrapper listener);
+
+
+    /**
+     * 添加marker 大头针
+     * @param markerOptions
+     * @return
+     */
+    public IMarker addMarker(IMarkerOptions markerOptions);
+
 //public final CameraPosition getCameraPosition() {
 //    try {
 //        return this.a.getCameraPosition();

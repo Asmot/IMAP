@@ -1,4 +1,4 @@
-package com.imap.maps;
+package com.imap.amap;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,30 +8,33 @@ import android.widget.FrameLayout;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
+import com.imap.maps.ConfigableConst;
+import com.imap.maps.IMap;
+import com.imap.maps.IMapView;
 
 /**
  * Created by zxy94400 on 2016/7/29.
  */
-public class MapViewAdapter extends FrameLayout implements IMapView{
+public class MapViewAdapter extends FrameLayout implements IMapView {
     MapView mapView;
 
     public MapViewAdapter(Context paramContext) {
         super(paramContext);
-        if(ConfigableConst.MAP_TYPE == ConfigableConst.AMAP)
-        mapView = new MapView(paramContext);
+        if (ConfigableConst.MAP_TYPE == ConfigableConst.AMAP)
+            mapView = new MapView(paramContext);
     }
 
     public MapViewAdapter(Context paramContext, AttributeSet paramAttributeSet) {
-        super(paramContext,paramAttributeSet);
-        if(ConfigableConst.MAP_TYPE == ConfigableConst.AMAP)
-        mapView = new MapView(paramContext, paramAttributeSet);
+        super(paramContext, paramAttributeSet);
+        if (ConfigableConst.MAP_TYPE == ConfigableConst.AMAP)
+            mapView = new MapView(paramContext, paramAttributeSet);
     }
 
     public MapViewAdapter(Context paramContext, AttributeSet paramAttributeSet,
-                   int paramInt) {
-        super(paramContext,paramAttributeSet,paramInt);
-        if(ConfigableConst.MAP_TYPE == ConfigableConst.AMAP)
-        mapView = new MapView(paramContext, paramAttributeSet, paramInt);
+                          int paramInt) {
+        super(paramContext, paramAttributeSet, paramInt);
+        if (ConfigableConst.MAP_TYPE == ConfigableConst.AMAP)
+            mapView = new MapView(paramContext, paramAttributeSet, paramInt);
     }
 
     //// TODO: 2016/7/29 带MapOption的实现方式
@@ -43,10 +46,10 @@ public class MapViewAdapter extends FrameLayout implements IMapView{
 //    }
 
     public IMap getMap() {
-        if(ConfigableConst.MAP_TYPE == ConfigableConst.AMAP) {
+        if (ConfigableConst.MAP_TYPE == ConfigableConst.AMAP) {
             if (mapView != null) {
                 AMap amap = mapView.getMap();
-                if(amap != null) {
+                if (amap != null) {
                     return new MapAdapter(amap);
                 }
             }
@@ -55,17 +58,17 @@ public class MapViewAdapter extends FrameLayout implements IMapView{
     }
 
     public final void onCreate(Bundle paramBundle) {
-       if(mapView != null) {
-           mapView.onCreate(paramBundle);
-           ViewGroup.LayoutParams mparams = new ViewGroup.LayoutParams(
-                   LayoutParams.MATCH_PARENT,
-                   LayoutParams.MATCH_PARENT);
-           this.addView(mapView,mparams);
-       }
+        if (mapView != null) {
+            mapView.onCreate(paramBundle);
+            ViewGroup.LayoutParams mparams = new ViewGroup.LayoutParams(
+                    LayoutParams.MATCH_PARENT,
+                    LayoutParams.MATCH_PARENT);
+            this.addView(mapView, mparams);
+        }
     }
 
     public final void onResume() {
-        if(mapView != null) {
+        if (mapView != null) {
             mapView.onResume();
         }
     }
@@ -74,7 +77,7 @@ public class MapViewAdapter extends FrameLayout implements IMapView{
      * 用户重载这个方法时必须调用父类的这个方法。
      */
     public final void onPause() {
-        if(mapView != null) {
+        if (mapView != null) {
             mapView.onPause();
         }
     }
@@ -83,17 +86,16 @@ public class MapViewAdapter extends FrameLayout implements IMapView{
      * 用户重载这个方法时必须调用父类的这个方法。
      */
     public final void onDestroy() {
-        if(mapView != null) {
+        if (mapView != null) {
             mapView.onDestroy();
         }
     }
 
     /**
      * 用户重载这个方法时必须调用父类的这个方法。
-     *
      */
     public final void onLowMemory() {
-        if(mapView != null) {
+        if (mapView != null) {
             mapView.onLowMemory();
         }
     }
@@ -102,7 +104,7 @@ public class MapViewAdapter extends FrameLayout implements IMapView{
      * 用户重载这个方法时必须调用父类的这个方法。
      */
     public final void onSaveInstanceState(Bundle paramBundle) {
-        if(mapView != null) {
+        if (mapView != null) {
             mapView.onSaveInstanceState(paramBundle);
         }
     }
@@ -114,10 +116,11 @@ public class MapViewAdapter extends FrameLayout implements IMapView{
 
     /**
      * 是在是否显示，在fragment切换的时候可以使用，或者想隐藏MapView的时候可以使用
+     *
      * @param visibility View.VISIBILE：显示； View.GONE：不显示；
      */
     public void setVisibility(int visibility) {
-        if(mapView != null) {
+        if (mapView != null) {
             mapView.setVisibility(visibility);
         }
     }

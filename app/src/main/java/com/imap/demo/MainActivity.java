@@ -4,16 +4,20 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.imap.R;
+import com.imap.amap.model.MarkerOptionWrapper;
 import com.imap.maps.IMap;
+import com.imap.maps.model.IMarker;
 import com.imap.maps.model.LatLngWrapper;
-import com.imap.maps.MapViewAdapter;
+import com.imap.amap.MapViewAdapter;
 import com.imap.maps.tools.LogManager;
 
 
 public class MainActivity extends Activity {
+    //39.90403, 116.407525
 
     MapViewAdapter mapViewAdapter;
     IMap imap;
+    IMarker iMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,10 @@ public class MainActivity extends Activity {
                 LogManager.Log(LogManager.DEBUG,"onMapClick",point);
             }
         });
+
+
+        iMarker = imap.addMarker(new MarkerOptionWrapper().position(new LatLngWrapper(39.90403, 116.407525)));
+
     }
 
     @Override

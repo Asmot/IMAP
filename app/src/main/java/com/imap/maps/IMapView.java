@@ -3,6 +3,8 @@ package com.imap.maps;
 import android.os.Bundle;
 
 /**
+ * 这个作为View没有太大的存在必要
+ * //// TODO: 2016/7/29 可以调研一下xml中可否使用抽象类或者接口
  * Created by zxy94400 on 2016/7/29.
  */
 public interface IMapView {
