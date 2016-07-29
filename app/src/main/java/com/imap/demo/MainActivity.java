@@ -4,12 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.imap.R;
-import com.imap.amap.model.MarkerOptionWrapper;
-import com.imap.maps.IMap;
-import com.imap.maps.model.IMarker;
-import com.imap.maps.model.LatLngWrapper;
-import com.imap.amap.MapViewAdapter;
-import com.imap.maps.tools.LogManager;
+import com.amap.MapViewAdapter;
+import com.common.maps.model.MarkerOptionWrapper;
+import com.common.maps.IMap;
+import com.common.maps.model.BitmapFactory;
+import com.common.maps.model.IMarker;
+import com.common.maps.model.LatLngWrapper;
+import com.common.maps.tools.LogManager;
 
 
 public class MainActivity extends Activity {
@@ -38,7 +39,10 @@ public class MainActivity extends Activity {
         });
 
 
-        iMarker = imap.addMarker(new MarkerOptionWrapper().position(new LatLngWrapper(39.90403, 116.407525)));
+        iMarker = imap.addMarker(new MarkerOptionWrapper()
+                .icon(BitmapFactory.fromResource(this,R.drawable.car))
+                .position(new LatLngWrapper(39.90403, 116.407525))
+                .anchor(0.5f,0.5f));
 
     }
 
@@ -46,12 +50,15 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         mapViewAdapter.onResume();
+        simulateStop = false;
+        new Thread(simulateRunnable).start();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         mapViewAdapter.onPause();
+        simulateStop = true;
     }
 
     @Override
@@ -65,4 +72,31 @@ public class MainActivity extends Activity {
         super.onDestroy();
         mapViewAdapter.onDestroy();
     }
+
+    boolean simulateStop = true;
+
+
+    Runnable simulateRunnable = new Runnable() {
+        @Override
+        public void run() {
+
+            int counter = 0;
+            LogManager.Log(LogManager.DEBUG,"start simulate Runnable");
+
+            while (!simulateStop) {
+                counter ++;
+                if(iMarker != null) {
+                    float rotate = iMarker.getRotateAngle();
+                    rotate += 5;
+                    iMarker.setRotateAngle(rotate);
+                }
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    };
 }
