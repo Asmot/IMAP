@@ -1,12 +1,14 @@
 package com.imap.maps.model;
 
 
-import com.amap.api.maps.model.BitmapDescriptor;
+import android.graphics.Bitmap;
+
 import com.imap.maps.IPoint;
 
 import java.util.ArrayList;
 
 /**
+ * 根据不同的SDk有不同的实现
  * Created by zxy94400 on 2016/7/29.
  */
 public interface IMarker {
@@ -15,9 +17,9 @@ public interface IMarker {
 
     public int getPeriod();
 
-    public void setIcons(ArrayList<BitmapDescriptor> var1);
+    public void setIcons(ArrayList<Bitmap> var1);
 
-    public ArrayList<BitmapDescriptor> getIcons();
+    public ArrayList<Bitmap> getIcons();
 
     public void remove();
 
@@ -45,7 +47,7 @@ public interface IMarker {
 
     public String getSnippet();
 
-    public void setIcon(BitmapDescriptor var1);
+    public void setIcon(Bitmap var1);
 
     public void setAnchor(float var1, float var2);
 

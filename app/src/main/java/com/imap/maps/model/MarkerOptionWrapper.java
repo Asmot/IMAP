@@ -1,14 +1,16 @@
-package com.imap.amap.model;
+package com.imap.maps.model;
 
-import com.amap.api.maps.model.BitmapDescriptor;
-import com.imap.maps.model.IMarkerOptions;
-import com.imap.maps.model.LatLngWrapper;
+import android.graphics.Bitmap;
+
 
 import java.util.ArrayList;
 
 /**
  * Created by zxy94400 on 2016/7/29.
+ * 这个类可以是共有的，里面可以包含所有SDKMarker的属性，
+ * 每次外部调用addMarker时都使用这个Options，在子类中在进行转换
  */
+//public class MarkerOptionWrapper implements IMarkerOptions{
 public class MarkerOptionWrapper implements IMarkerOptions{
 
     private LatLngWrapper latLng;
@@ -19,28 +21,23 @@ public class MarkerOptionWrapper implements IMarkerOptions{
     private float zIndex = 0;
     private boolean isDraggable = false;
     private boolean isVisible = true;
-    String id;
     private boolean perspective = false;
     private int offsetX = 0, offsetY = 0;
-    private ArrayList<BitmapDescriptor> bitmapDescriptors = new ArrayList<BitmapDescriptor>();
-    ;
-    /**
-     * 刷新周期
-     */
+    private ArrayList<Bitmap> bitmaps = new ArrayList<Bitmap>();
     private int period = 20;
     private boolean isGps = false;
     private boolean isFlat = false;
     private boolean isPerspective;
 
     @Override
-    public IMarkerOptions icons(ArrayList<BitmapDescriptor> var1) {
-        this.bitmapDescriptors = var1;
+    public IMarkerOptions icons(ArrayList<Bitmap> var1) {
+        this.bitmaps = var1;
         return this;
     }
 
     @Override
-    public ArrayList<BitmapDescriptor> getIcons() {
-        return bitmapDescriptors;
+    public ArrayList<Bitmap> getIcons() {
+        return bitmaps;
     }
 
     @Override
@@ -78,23 +75,23 @@ public class MarkerOptionWrapper implements IMarkerOptions{
     }
 
 
-    private void initBitmapDescriptors() {
-        if (bitmapDescriptors == null) {
-            bitmapDescriptors = new ArrayList<BitmapDescriptor>();
+    private void initBitmaps() {
+        if (bitmaps == null) {
+            bitmaps = new ArrayList<Bitmap>();
         }
     }
 
     /**
      * 设置MarkerOptions 对象的自定义图标。
      *
-     * @param icon 设置图标的BitmapDescriptor对象
+     * @param icon 设置图标的Bitmap对象
      * @return MarkerOptions对象。
      * @since V2.0
      */
-    public IMarkerOptions icon(BitmapDescriptor icon) {
-        initBitmapDescriptors();
-        bitmapDescriptors.clear();
-        bitmapDescriptors.add(icon);
+    public IMarkerOptions icon(Bitmap icon) {
+        initBitmaps();
+        bitmaps.clear();
+        bitmaps.add(icon);
         return this;
     }
 
@@ -159,9 +156,9 @@ public class MarkerOptionWrapper implements IMarkerOptions{
     }
 
     @Override
-    public BitmapDescriptor getIcon() {
-        if (bitmapDescriptors != null && bitmapDescriptors.size() != 0) {
-            return this.bitmapDescriptors.get(0);
+    public Bitmap getIcon() {
+        if (bitmaps != null && bitmaps.size() != 0) {
+            return this.bitmaps.get(0);
         } else {
             return null;
         }
