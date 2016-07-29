@@ -1,4 +1,4 @@
-package com.imap.maps.model;
+package com.imap.maps;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,22 +12,25 @@ import com.amap.api.maps.MapView;
 /**
  * Created by zxy94400 on 2016/7/29.
  */
-public class MapViewAdapter extends FrameLayout{
+public class MapViewAdapter extends FrameLayout implements IMapView{
     MapView mapView;
 
     public MapViewAdapter(Context paramContext) {
         super(paramContext);
+        if(ConfigableConst.MAP_TYPE == ConfigableConst.AMAP)
         mapView = new MapView(paramContext);
     }
 
     public MapViewAdapter(Context paramContext, AttributeSet paramAttributeSet) {
         super(paramContext,paramAttributeSet);
+        if(ConfigableConst.MAP_TYPE == ConfigableConst.AMAP)
         mapView = new MapView(paramContext, paramAttributeSet);
     }
 
     public MapViewAdapter(Context paramContext, AttributeSet paramAttributeSet,
                    int paramInt) {
         super(paramContext,paramAttributeSet,paramInt);
+        if(ConfigableConst.MAP_TYPE == ConfigableConst.AMAP)
         mapView = new MapView(paramContext, paramAttributeSet, paramInt);
     }
 
@@ -39,9 +42,15 @@ public class MapViewAdapter extends FrameLayout{
 //        getMapFragmentDelegate().setOptions(mapOptions);
 //    }
 
-    public AMap getMap() {
-        if(mapView != null)
-            return mapView.getMap();
+    public IMap getMap() {
+        if(ConfigableConst.MAP_TYPE == ConfigableConst.AMAP) {
+            if (mapView != null) {
+                AMap amap = mapView.getMap();
+                if(amap != null) {
+                    return new MapAdapter(amap);
+                }
+            }
+        }
         return null;
     }
 
