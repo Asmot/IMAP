@@ -8,25 +8,29 @@ import com.common.maps.model.MarkerOptionWrapper;
  * Created by zxy94400 on 2016/7/29.
  */
 public interface IMap {
-//
-//    /**
-//     * 道路底图。
-//     */
-//    public static final int MAP_TYPE_NORMAL = 1;
-//    /**
-//     * 卫星底图。
-//     */
-//    public static final int MAP_TYPE_SATELLITE = 2;
-//    /**
-//     * 黑夜地图。
-//     *
-//     * @since V2.2.1
-//     */
-//    public static final int MAP_TYPE_NIGHT = 3;
-//    /**
-//     * 导航模式
-//     */
-//    public static final int MAP_TYPE_NAVI = 4;
+
+    /**
+     * 道路底图。
+     */
+    public static final int IMAP_TYPE_NORMAL = 1;
+    /**
+     * 卫星底图。
+     */
+    public static final int IMAP_TYPE_SATELLITE = 2;
+    /**
+     * 黑夜地图。
+     */
+    public static final int IMAP_TYPE_NIGHT = 3;
+    /**
+     * 导航模式
+     */
+    public static final int IMAP_TYPE_NAVI = 4;
+
+    /**
+     * 空白模式，baidu特有
+     */
+    public static final int IMAP_TYPE_NONE = 5;
+
 //    /**
 //     * 只在第一次定位移动到地图中心点。
 //     *
@@ -46,9 +50,6 @@ public interface IMap {
 //     */
 //    public static final int LOCATION_TYPE_MAP_ROTATE = 3;//定位、移动到中心点，跟踪并根据方向显示，值为3
 //
-//    public static final int MASK_LAYER_NONE = -1;
-//    public static final int MASK_LAYER_UNDER_MARKER = 0;
-//    public static final int MASK_LAYER_UNDER_LINE = 1;
     //// TODO: 2016/7/29 暂时只实现单击
     public static abstract interface OnMapClickListenerWrapper{
         /**
@@ -62,6 +63,14 @@ public interface IMap {
 
     public void setOnMapClickListener(final OnMapClickListenerWrapper listener);
 
+
+    /**
+     * 切换地图模式 夜间、导航等
+     * @param mapType
+     */
+    public void setMapType(int mapType);
+
+    public int getMapType();
 
     /**
      * 添加marker 大头针
@@ -231,21 +240,7 @@ public interface IMap {
 //        }
 //    }
 //
-//    public final int getMapType() {
-//        try {
-//            return this.a.getMapType();
-//        } catch (RemoteException var2) {
-//            throw new RuntimeRemoteException(var2);
-//        }
-//    }
-//
-//    public final void setMapType(int var1) {
-//        try {
-//            this.a.setMapType(var1);
-//        } catch (RemoteException var3) {
-//            throw new RuntimeRemoteException(var3);
-//        }
-//    }
+
 //
 //    public final boolean isTrafficEnabled() {
 //        try {

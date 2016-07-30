@@ -15,6 +15,7 @@ import com.common.maps.IMap;
 import com.common.maps.model.IMarker;
 import com.common.maps.model.LatLngWrapper;
 import com.common.maps.model.MarkerOptionWrapper;
+import com.common.maps.tools.LogManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,29 @@ public class MapAdapter implements IMap {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void setMapType(int mapType) {
+        baiduMap.setMapType(mapType);
+        switch (mapType) {
+            case IMAP_TYPE_NIGHT: LogManager.Log(LogManager.WARN,"setMapType baidu sdk do not hava night tpye");break;
+            case IMAP_TYPE_NAVI: LogManager.Log(LogManager.WARN,"setMapType baidu sdk do not hava navi tpye");break;
+            case IMAP_TYPE_NONE: baiduMap.setMapType(BaiduMap.MAP_TYPE_NONE);break;
+            case IMAP_TYPE_SATELLITE: baiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);break;
+            default:baiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);break;
+        }
+    }
+
+    @Override
+    public int getMapType() {
+        int mapType = baiduMap.getMapType();
+        switch (mapType) {
+            case BaiduMap.MAP_TYPE_NORMAL: return IMap.IMAP_TYPE_NORMAL;
+            case BaiduMap.MAP_TYPE_SATELLITE: return IMap.IMAP_TYPE_SATELLITE;
+            case BaiduMap.MAP_TYPE_NONE: return IMap.IMAP_TYPE_NONE;
+            default:return IMap.IMAP_TYPE_NORMAL;
+        }
     }
 
     @Override

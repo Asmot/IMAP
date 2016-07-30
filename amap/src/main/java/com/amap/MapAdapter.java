@@ -13,6 +13,7 @@ import com.common.maps.IMap;
 import com.common.maps.model.IMarker;
 import com.common.maps.model.LatLngWrapper;
 import com.common.maps.model.MarkerOptionWrapper;
+import com.common.maps.tools.LogManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,28 @@ public class MapAdapter implements IMap {
                 listener.onMapClick(new LatLngWrapper(latLng.latitude,latLng.longitude));
             }
         });
+    }
+
+    @Override
+    public void setMapType(int mapType) {
+        switch (mapType) {
+            case IMAP_TYPE_NIGHT: aMap.setMapType(AMap.MAP_TYPE_NIGHT);break;
+            case IMAP_TYPE_NAVI: aMap.setMapType(AMap.MAP_TYPE_NAVI);break;
+            case IMAP_TYPE_SATELLITE: aMap.setMapType(AMap.MAP_TYPE_SATELLITE);break;
+            case IMAP_TYPE_NONE: LogManager.Log(LogManager.WARN,"setMapType baidu sdk do not hava none tpye");break;
+            default:aMap.setMapType(AMap.MAP_TYPE_NORMAL);break;
+        }
+    }
+
+    @Override
+    public int getMapType() {
+        int mapType = aMap.getMapType();
+        switch (mapType) {
+            case AMap.MAP_TYPE_NIGHT: return IMAP_TYPE_NIGHT;
+            case AMap.MAP_TYPE_NAVI: return IMAP_TYPE_NAVI;
+            case AMap.MAP_TYPE_SATELLITE: return IMAP_TYPE_SATELLITE;
+            default:return IMAP_TYPE_NORMAL;
+        }
     }
 
     @Override
@@ -82,11 +105,5 @@ public class MapAdapter implements IMap {
             return new MarkerWrapper(marker);
         return null;
     }
-
-//    public MarkerWrapper addMarker(MarkerOptionWrapper optionAdapter) {
-//
-//        aMap.addMarker(optionAdapter.toMarkerOption())
-//    }
-
 
 }

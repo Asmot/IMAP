@@ -58,6 +58,8 @@ public class MainActivity extends Activity {
                 .position(new LatLngWrapper(39.90403, 116.407525))
                 .anchor(0.5f, 0.5f));
 
+//        bdImap.setMapType(IMap.IMAP_TYPE_NONE);
+
     }
 
     private void testAmap(Bundle savedInstanceState) {
@@ -79,6 +81,9 @@ public class MainActivity extends Activity {
                 .icon(BitmapFactory.fromResource(this, R.drawable.car))
                 .position(new LatLngWrapper(39.90403, 116.407525))
                 .anchor(0.5f, 0.5f));
+
+
+//        imap.setMapType(IMap.IMAP_TYPE_NIGHT);
     }
 
     @Override
