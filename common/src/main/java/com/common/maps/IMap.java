@@ -1,5 +1,6 @@
 package com.common.maps;
 
+import com.common.maps.model.CameraPosition;
 import com.common.maps.model.IMarker;
 import com.common.maps.model.LatLngWrapper;
 import com.common.maps.model.MarkerOptionWrapper;
@@ -61,8 +62,19 @@ public interface IMap {
         public abstract void onMapClick(LatLngWrapper point);
     }
 
+    public interface OnCameraChangeListenerWrapper {
+
+        void onCameraChangeStart(CameraPosition cameraPosition);
+
+        void onCameraChange(CameraPosition cameraPosition);
+
+        void onCameraChangeFinish(CameraPosition cameraPosition);
+    }
+//
+
     public void setOnMapClickListener(final OnMapClickListenerWrapper listener);
 
+    public void setOnCameraChangeListener(final OnCameraChangeListenerWrapper listener);
 
     /**
      * 切换地图模式 夜间、导航等
@@ -71,6 +83,9 @@ public interface IMap {
     public void setMapType(int mapType);
 
     public int getMapType();
+
+//    public final void moveCamera(CameraUpdate cameraUpdate)
+
 
     /**
      * 添加marker 大头针
@@ -95,13 +110,7 @@ public interface IMap {
 //        return this.a.getMinZoomLevel();
 //    }
 //
-//    public final void moveCamera(CameraUpdate var1) {
-//        try {
-//            this.a.moveCamera(var1.a());
-//        } catch (RemoteException var3) {
-//            throw new RuntimeRemoteException(var3);
-//        }
-//    }
+
 //
 //    public final void animateCamera(CameraUpdate var1) {
 //        try {
@@ -375,13 +384,7 @@ public interface IMap {
 //        }
 //    }
 //
-//    public final void setOnCameraChangeListener(AMap.OnCameraChangeListener var1) {
-//        try {
-//            this.a.setOnCameraChangeListener(var1);
-//        } catch (RemoteException var3) {
-//            throw new RuntimeRemoteException(var3);
-//        }
-//    }
+
 //
 //    public final void setOnMapClickListener(AMap.OnMapClickListener var1) {
 //        try {

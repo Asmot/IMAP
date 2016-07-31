@@ -6,9 +6,9 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapPoi;
+import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.model.LatLng;
 import com.bdmap.model.MarkerWrapper;
 import com.common.maps.IMap;
@@ -31,15 +31,44 @@ public class MapAdapter implements IMap {
 
     @Override
     public void setOnMapClickListener(final OnMapClickListenerWrapper listener) {
-        baiduMap.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
+        //// TODO: 2016/7/30 baidu的onPoiClick 和OnMapClick在同一个回调当中
+       baiduMap.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
+           @Override
+           public void onMapClick(LatLng latLng) {
+               if(listener != null) {
+                   listener.onMapClick(new LatLngWrapper(latLng.latitude,latLng.longitude));
+               }
+           }
+
+           @Override
+           public boolean onMapPoiClick(MapPoi mapPoi) {
+               return false;
+           }
+       });
+    }
+
+    @Override
+    public void setOnCameraChangeListener(final OnCameraChangeListenerWrapper listener) {
+        if(listener == null) {
+            baiduMap.setOnMapStatusChangeListener(null);
+            return;
+        }
+        baiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
             @Override
-            public void onMapClick(LatLng latLng) {
-                listener.onMapClick(new LatLngWrapper(latLng.latitude,latLng.longitude));
+            public void onMapStatusChangeStart(MapStatus mapStatus) {
+                if(listener != null) {
+
+                }
             }
 
             @Override
-            public boolean onMapPoiClick(MapPoi mapPoi) {
-                return false;
+            public void onMapStatusChange(MapStatus mapStatus) {
+
+            }
+
+            @Override
+            public void onMapStatusChangeFinish(MapStatus mapStatus) {
+
             }
         });
     }
