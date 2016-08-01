@@ -84,7 +84,7 @@ public interface IMap {
 
     public int getMapType();
 
-//    public final void moveCamera(CameraUpdate cameraUpdate)
+//    public final void moveCamera(CameraUpdateWrapper cameraUpdate)
 
 
     /**
@@ -112,7 +112,7 @@ public interface IMap {
 //
 
 //
-//    public final void animateCamera(CameraUpdate var1) {
+//    public final void animateCamera(CameraUpdateWrapper var1) {
 //        try {
 //            this.a.animateCamera(var1.a());
 //        } catch (RemoteException var3) {
@@ -120,7 +120,7 @@ public interface IMap {
 //        }
 //    }
 //
-//    public final void animateCamera(CameraUpdate var1, AMap.CancelableCallback var2) {
+//    public final void animateCamera(CameraUpdateWrapper var1, AMap.CancelableCallback var2) {
 //        try {
 //            this.a.animateCameraWithCallback(var1.a(), var2);
 //        } catch (RemoteException var4) {
@@ -128,7 +128,7 @@ public interface IMap {
 //        }
 //    }
 //
-//    public final void animateCamera(CameraUpdate var1, long var2, AMap.CancelableCallback var4) {
+//    public final void animateCamera(CameraUpdateWrapper var1, long var2, AMap.CancelableCallback var4) {
 //        try {
 //            cv.b(var2 > 0L, "durationMs must be positive");
 //            this.a.animateCameraWithDurationAndCallback(var1.a(), var2, var4);
